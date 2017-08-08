@@ -7,17 +7,16 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarRegistro"
         android:layout_width="match_parent"
-        android:background="@android:color/black"
-        android:layout_height="?attr/actionBarSize"
-        >
+        android:background="@android:color/holo_green_dark"
+        android:layout_height="?attr/actionBarSize">
 
     </android.support.v7.widget.Toolbar>
 
-    <FrameLayout
-        android:id="@+id/frameRegistro"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/frameRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </FrameLayout>
+        </FrameLayout>
 
 </LinearLayout>
