@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.iesoluciones.freecon">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,19 +17,20 @@
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activities.LoginActivity">
 
         </activity>
-        <activity android:name=".RegistroActivity">
+        <activity android:name=".activities.RegistroActivity"
+            android:parentActivityName=".activities.LoginActivity">
 
         </activity>
 
         <activity
-            android:name=".DrawerActivity"
+            android:name=".activities.DrawerActivity"
             android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activities.SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

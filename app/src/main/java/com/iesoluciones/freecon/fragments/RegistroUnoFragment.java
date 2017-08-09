@@ -5,15 +5,21 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
+import android.support.design.widget.TextInputEditText;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.intefaces.RegistroCallback;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.view.RxViewGroup;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import org.w3c.dom.Text;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,43 +31,45 @@ import butterknife.OnClick;
 
 public class RegistroUnoFragment extends Fragment {
 
+    static String TAG=RegistroUnoFragment.class.getCanonicalName();
+
 
     @BindView(R.id.textInputCorreoElectronico)
     TextInputLayout textInputCorreoElectronico;
     @BindView(R.id.editCorreoElectronico)
-    AppCompatEditText AppCompatActivity;
+    TextInputEditText editCorreoElectronico;
     @BindView(R.id.textInputContrasena)
     TextInputLayout textInputContrasena;
     @BindView(R.id.editContrasena)
-    AppCompatEditText editContrasena;
+    TextInputEditText editContrasena;
     @BindView(R.id.textInputContrasenaConfirmacion)
     TextInputLayout textInputContrasenaConfirmacion;
     @BindView(R.id.editContrasenaConfirmacion)
-    AppCompatEditText editContrasenaConfirmacion;
+    TextInputEditText editContrasenaConfirmacion;
     @BindView(R.id.textInputTelefono)
     TextInputLayout textInputTelefono;
     @BindView(R.id.editTelefono)
-    AppCompatEditText editTelefono;
+    TextInputEditText editTelefono;
     @BindView(R.id.textInputCalle)
     TextInputLayout textInputCalle;
     @BindView(R.id.editCalle)
-    AppCompatEditText editCalle;
+    TextInputEditText editCalle;
     @BindView(R.id.textInputColonia)
     TextInputLayout textInputColonia;
     @BindView(R.id.editColonia)
-    AppCompatEditText editColonia;
+    TextInputEditText editColonia;
     @BindView(R.id.textInputCiudad)
     TextInputLayout textInputCiudad;
     @BindView(R.id.editCiudad)
-    AppCompatEditText editCiudad;
+    TextInputEditText editCiudad;
     @BindView(R.id.textInputCP)
     TextInputLayout textInputCP;
     @BindView(R.id.editCP)
-    AppCompatEditText editCP;
+    TextInputEditText editCP;
     @BindView(R.id.textInputExterior)
     TextInputLayout textInputExterior;
     @BindView(R.id.editExterior)
-    AppCompatEditText editExterior;
+    TextInputEditText editExterior;
     @BindView(R.id.buttonContinuar)
     AppCompatButton buttonContinuar;
     RegistroCallback registroCallback;
