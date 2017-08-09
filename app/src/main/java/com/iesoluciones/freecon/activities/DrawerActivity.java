@@ -1,12 +1,8 @@
-package com.iesoluciones.freecon;
+package com.iesoluciones.freecon.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,8 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.fragments.HistorialFragment;
-import com.iesoluciones.freecon.fragments.RegistroDosFragment;
 import com.iesoluciones.freecon.fragments.SaldoFragment;
 import com.iesoluciones.freecon.fragments.ServiciosFragment;
 

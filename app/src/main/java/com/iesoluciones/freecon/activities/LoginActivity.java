@@ -1,4 +1,4 @@
-package com.iesoluciones.freecon;
+package com.iesoluciones.freecon.activities;
 
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
@@ -8,6 +8,8 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.iesoluciones.freecon.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
