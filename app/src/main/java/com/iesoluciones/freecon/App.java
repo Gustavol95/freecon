@@ -1,8 +1,11 @@
 package com.iesoluciones.freecon;
 import android.app.Application;
 
+import com.iesoluciones.freecon.interceptors.LogInterceptor;
+import com.iesoluciones.freecon.models.CategoriaResponse;
 import com.iesoluciones.freecon.models.DaoMaster;
 import com.iesoluciones.freecon.models.DaoSession;
+import com.iesoluciones.freecon.models.RegistroBody;
 import com.iesoluciones.freecon.models.Servicio;
 import com.iesoluciones.freecon.models.ServicioResponse;
 
@@ -16,7 +19,11 @@ import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -42,7 +49,7 @@ public class App extends Application {
         Database db = helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
         OkHttpClient client = new OkHttpClient.Builder()
-               // .addInterceptor(new LogInterceptor())
+                .addInterceptor(new LogInterceptor())
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -72,8 +79,23 @@ public class App extends Application {
     }
 
     public interface ApiRoutes{
+
         @GET("proveedores/servicios")
-        Observable<ServicioResponse> getDirections();
+        Observable<ServicioResponse> getServicios();
+
+        @GET("proveedores/categorias")
+        Observable<CategoriaResponse> getCategorias();
+
+        @POST("proveedores/register")
+        Observable<ResponseBody> registrar(@Body RegistroBody servicio);
+
+        @FormUrlEncoded
+        @POST("proveedores/login")
+        Observable<ResponseBody> login(@Field("email") String email, @Field("password") String password);
+
+        @POST("proveedores/confirmaccount")
+        Observable<ResponseBody> confirmarRegistro(@Field("email") String email, @Field("codigo") String codigo);
+
     }
 
 

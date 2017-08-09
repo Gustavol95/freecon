@@ -34,6 +34,15 @@ public class RegistroUnoFragment extends Fragment {
     static String TAG=RegistroUnoFragment.class.getCanonicalName();
 
 
+
+    @BindView(R.id.textInputNombre)
+    TextInputLayout textInputNombre;
+    @BindView(R.id.editNombre)
+    TextInputEditText editNombre;
+    @BindView(R.id.textInputApellido)
+    TextInputLayout textInputApellido;
+    @BindView(R.id.editApellido)
+    TextInputEditText editApellido;
     @BindView(R.id.textInputCorreoElectronico)
     TextInputLayout textInputCorreoElectronico;
     @BindView(R.id.editCorreoElectronico)
@@ -54,6 +63,10 @@ public class RegistroUnoFragment extends Fragment {
     TextInputLayout textInputCalle;
     @BindView(R.id.editCalle)
     TextInputEditText editCalle;
+    @BindView(R.id.textInputEstado)
+    TextInputLayout textInputEstado;
+    @BindView(R.id.editEstado)
+    TextInputEditText editEstado;
     @BindView(R.id.textInputColonia)
     TextInputLayout textInputColonia;
     @BindView(R.id.editColonia)
@@ -70,6 +83,10 @@ public class RegistroUnoFragment extends Fragment {
     TextInputLayout textInputExterior;
     @BindView(R.id.editExterior)
     TextInputEditText editExterior;
+    @BindView(R.id.textInputInterior)
+    TextInputLayout textInputInterior;
+    @BindView(R.id.editInterior)
+    TextInputEditText editInterior;
     @BindView(R.id.buttonContinuar)
     AppCompatButton buttonContinuar;
     RegistroCallback registroCallback;
@@ -96,6 +113,18 @@ public class RegistroUnoFragment extends Fragment {
 
     @OnClick(R.id.buttonContinuar)
     public void continuar(){
+        registroCallback.getRegistro().setNombre(editNombre.getText().toString());
+        registroCallback.getRegistro().setApellido(editApellido.getText().toString());
+        registroCallback.getRegistro().setContrasena(editContrasena.getText().toString());
+        registroCallback.getRegistro().setEmail(editCorreoElectronico.getText().toString());
+        registroCallback.getRegistro().setCelular(editTelefono.getText().toString());
+        registroCallback.getRegistro().setCalle(editCalle.getText().toString());
+        registroCallback.getRegistro().setEstado(editEstado.getText().toString());
+        registroCallback.getRegistro().setColonia(editColonia.getText().toString());
+        registroCallback.getRegistro().setCiudad(editCiudad.getText().toString());
+        registroCallback.getRegistro().setCp(editCP.getText().toString());
+        registroCallback.getRegistro().setExterior(editExterior.getText().toString());
+        registroCallback.getRegistro().setInterior(editInterior.getText().toString());
         registroCallback.pasoUno(registroCallback);
 
     }

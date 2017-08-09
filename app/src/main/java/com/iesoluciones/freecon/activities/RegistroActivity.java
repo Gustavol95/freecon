@@ -14,6 +14,7 @@ import com.iesoluciones.freecon.fragments.RegistroDosFragment;
 import com.iesoluciones.freecon.fragments.RegistroTresFragment;
 import com.iesoluciones.freecon.fragments.RegistroUnoFragment;
 import com.iesoluciones.freecon.intefaces.RegistroCallback;
+import com.iesoluciones.freecon.models.RegistroBody;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +32,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     int index;
     @BindView(R.id.toolbarRegistro)
     Toolbar toolbar;
-
+    RegistroBody registro;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
         setContentView(R.layout.activity_registro);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        registro=new RegistroBody();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (savedInstanceState == null) {
             Fragment newFragment = RegistroUnoFragment.newInstance(this);
@@ -96,5 +98,10 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     @Override
     public void finalizar() {
 
+    }
+
+    @Override
+    public RegistroBody getRegistro() {
+        return registro;
     }
 }

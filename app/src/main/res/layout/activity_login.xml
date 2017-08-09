@@ -25,9 +25,10 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/inputLayoutUsuario"
             android:layout_width="250dp"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:hint="@string/correo">
 
-            <android.support.v7.widget.AppCompatEditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/editUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -37,9 +38,10 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputContrasena"
             android:layout_width="250dp"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:hint="@string/contrasena">
 
-            <android.support.v7.widget.AppCompatEditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/editContrasena"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -63,7 +65,7 @@
             android:id="@+id/buttonIniciarSesion"
             android:layout_width="250dp"
             android:layout_height="match_parent"
-            android:text="Iniciar sesión" />
+            android:text="@string/iniciarSesion" />
 
 
     </LinearLayout>

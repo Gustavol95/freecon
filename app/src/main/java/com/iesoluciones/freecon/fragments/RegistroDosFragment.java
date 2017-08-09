@@ -16,7 +16,9 @@ import android.view.ViewGroup;
 import com.iesoluciones.freecon.App;
 import com.iesoluciones.freecon.ObservableHelper;
 import com.iesoluciones.freecon.R;
+import com.iesoluciones.freecon.adapters.GirosAdapter;
 import com.iesoluciones.freecon.intefaces.RegistroCallback;
+import com.iesoluciones.freecon.models.Categoria;
 import com.iesoluciones.freecon.models.Servicio;
 
 import java.util.List;
@@ -43,8 +45,9 @@ public class RegistroDosFragment extends Fragment {
     ViewPager viewpager;
     @BindView(R.id.buttonContinuar)
     AppCompatButton buttonContinuar;
+    GirosAdapter adapter;
 
-    public static RegistroDosFragment newInstance(RegistroCallback registroCallback){
+    public static RegistroDosFragment newInstance(RegistroCallback registroCallback) {
         RegistroDosFragment fragment = new RegistroDosFragment();
         fragment.setRegistroCallback(registroCallback);
         return fragment;
@@ -59,12 +62,26 @@ public class RegistroDosFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,view);
-        ObservableHelper.getServicios().subscribe((List<Servicio> data)->{
-            for(Servicio s:data){
-                Log.i(TAG,s.toString());
+        ButterKnife.bind(this, view);
+
+        ObservableHelper.getServicios().subscribe((List<Servicio> data) -> {
+            for (Servicio s : data) {
+                Log.i(TAG, s.toString());
             }
+        }, error ->{
+            Log.i(TAG,"trono "+error.getMessage());
         });
+
+        ObservableHelper.getCatgorias().subscribe((List<Categoria> data) -> {
+            for (Categoria s : data) {
+                Log.i(TAG, s.toString());
+            }
+        }, error ->{
+            Log.i(TAG,"trono "+error.getMessage());
+        });
+
+        adapter = new GirosAdapter(this.getContext());
+        viewpager.setAdapter(adapter);
     }
 
     public RegistroCallback getRegistroCallback() {
@@ -76,7 +93,9 @@ public class RegistroDosFragment extends Fragment {
     }
 
     @OnClick(R.id.buttonContinuar)
-    public void continuar(){
+    public void continuar() {
+        registroCallback.getRegistro().setProfesion(editProfesion.getText().toString());
+        registroCallback.getRegistro().setServicios(adapter.getSeleccionados());
         registroCallback.pasoDos(registroCallback);
     }
 }

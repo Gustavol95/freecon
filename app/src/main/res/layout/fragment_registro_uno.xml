@@ -22,21 +22,44 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:orientation="vertical">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:hintEnabled="true"
+                    android:hint="@string/nombre">
 
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputApellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:hintEnabled="true"
+                    android:hint="@string/apellido">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editApellido"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputCorreoElectronico"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     app:hintEnabled="true"
-
-                    android:hint="@string/correo"
-                    >
+                    android:hint="@string/correo">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editCorreoElectronico"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        />
+                        android:layout_height="match_parent" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -131,6 +154,18 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputEstado"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editEstado"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/estado"/>
+
+                </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -162,6 +197,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/exterior"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textInputInterior"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/editInterior"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/interior"/>
 
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
