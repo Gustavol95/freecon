@@ -1,13 +1,16 @@
 package com.iesoluciones.freecon;
 import android.app.Application;
 
-import com.iesoluciones.freecon.interceptors.LogInterceptor;
+import com.facebook.FacebookSdk;
 import com.iesoluciones.freecon.models.CategoriaResponse;
 import com.iesoluciones.freecon.models.DaoMaster;
 import com.iesoluciones.freecon.models.DaoSession;
+import com.iesoluciones.freecon.models.FinalizarRegistroFbBody;
+import com.iesoluciones.freecon.models.LoginFbResponse;
 import com.iesoluciones.freecon.models.RegistroBody;
 import com.iesoluciones.freecon.models.Servicio;
 import com.iesoluciones.freecon.models.ServicioResponse;
+import com.iesoluciones.freecon.network.interceptors.LogInterceptor;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -15,6 +18,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -24,6 +28,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 /**
@@ -36,6 +41,7 @@ public class App extends Application {
     private static App shareInstance;
     private DaoSession daoSession;
     ApiRoutes apiRoutes;
+    String token;
 
     public static synchronized App getInstance(){
         return shareInstance;
@@ -51,6 +57,8 @@ public class App extends Application {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new LogInterceptor())
                 .build();
+
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .client(client)
@@ -78,6 +86,14 @@ public class App extends Application {
         this.apiRoutes = apiRoutes;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public interface ApiRoutes{
 
         @GET("proveedores/servicios")
@@ -87,14 +103,22 @@ public class App extends Application {
         Observable<CategoriaResponse> getCategorias();
 
         @POST("proveedores/register")
-        Observable<ResponseBody> registrar(@Body RegistroBody servicio);
+        Observable<LoginFbResponse> registrar(@Body RegistroBody servicio);
 
         @FormUrlEncoded
         @POST("proveedores/login")
         Observable<ResponseBody> login(@Field("email") String email, @Field("password") String password);
 
+        @FormUrlEncoded
         @POST("proveedores/confirmaccount")
-        Observable<ResponseBody> confirmarRegistro(@Field("email") String email, @Field("codigo") String codigo);
+        Observable<LoginFbResponse> confirmarRegistro(@Field("email") String email, @Field("codigo") String codigo);
+
+        @FormUrlEncoded
+        @POST("proveedores/login-fb")
+        Observable<LoginFbResponse> loginFb(@Field("token") String token);
+
+        @PUT("proveedores/finalizarregistro-fb")
+        Observable<LoginFbResponse> finalizarRegistroFb(@Body RegistroBody registroFbBody);
 
     }
 

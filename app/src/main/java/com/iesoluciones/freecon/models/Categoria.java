@@ -1,5 +1,7 @@
 package com.iesoluciones.freecon.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
@@ -12,6 +14,7 @@ public class Categoria{
 
     @Id
     long id;
+    @SerializedName("nombre")
     String nombre;
 
     @Generated(hash = 1341272489)

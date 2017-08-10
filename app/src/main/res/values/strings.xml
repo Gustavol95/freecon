@@ -51,6 +51,10 @@
     <string name="title_alert">Alerta !</string>
     <string name="title_error">Error !</string>
     <string name="button_ok">Continuar</string>
+    <string name="button_send">Enviar</string>
+    <string name="button_cancel">Cancelar</string>
+    <string name="there_was_an_error">Hubo un problema</string>
+    <string name="activation_error">Necesita confirmar cuenta con el codigo que se le envio a su correo.</string>
     <string name="invalid_credentials">Usuario y/o contraseña incorrectos.</string>
     <string name="too_many_attempts">Cuenta bloqueada por intentos fallidos de inicio de sesión, Intente en 15 minutos.</string>
     <string name="token_expired">Tu sesión ha expirado, vuelva a ingresar.</string>
@@ -63,6 +67,12 @@
     <string name="report_error">Enviar reporte</string>
     <string name="network_settings">Ir a configuración de red</string>
     <string name="timeout">Tiempo de espera agotado</string>
+
+    <!-- FACEBOOK METADATA -->
+    <string name="facebook_app_id">154269361790967</string>
+    <string name="fb_login_protocol_scheme">fb154269361790967</string>
+
+
 
 
 </resources>

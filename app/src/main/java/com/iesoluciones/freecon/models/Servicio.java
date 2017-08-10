@@ -13,10 +13,12 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Servicio {
 
+    @SerializedName("id")
     @Id
     long id;
     @SerializedName("categoria_id")
     long categoriaId;
+    @SerializedName("nombre")
     String nombre;
 
     @Generated(hash = 168516395)

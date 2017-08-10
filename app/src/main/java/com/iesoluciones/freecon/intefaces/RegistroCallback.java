@@ -13,6 +13,7 @@ public interface RegistroCallback {
     void pasoDos(RegistroCallback registroCallback);
     void finalizar();
     RegistroBody getRegistro();
+    boolean isFacebookUser();
 
 
 }

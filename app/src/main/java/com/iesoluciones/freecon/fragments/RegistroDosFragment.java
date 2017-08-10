@@ -64,21 +64,6 @@ public class RegistroDosFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        ObservableHelper.getServicios().subscribe((List<Servicio> data) -> {
-            for (Servicio s : data) {
-                Log.i(TAG, s.toString());
-            }
-        }, error ->{
-            Log.i(TAG,"trono "+error.getMessage());
-        });
-
-        ObservableHelper.getCatgorias().subscribe((List<Categoria> data) -> {
-            for (Categoria s : data) {
-                Log.i(TAG, s.toString());
-            }
-        }, error ->{
-            Log.i(TAG,"trono "+error.getMessage());
-        });
 
         adapter = new GirosAdapter(this.getContext());
         viewpager.setAdapter(adapter);

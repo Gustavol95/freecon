@@ -33,6 +33,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     @BindView(R.id.toolbarRegistro)
     Toolbar toolbar;
     RegistroBody registro;
+    boolean facebookUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +43,10 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
         setSupportActionBar(toolbar);
         registro=new RegistroBody();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        facebookUser=getIntent().getBooleanExtra("fb",false);
+        Log.i(TAG," facebook "+facebookUser);
+
         if (savedInstanceState == null) {
             Fragment newFragment = RegistroUnoFragment.newInstance(this);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -103,5 +108,10 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     @Override
     public RegistroBody getRegistro() {
         return registro;
+    }
+
+    @Override
+    public boolean isFacebookUser() {
+        return facebookUser;
     }
 }

@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.iesoluciones.freecon.App;
 import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.intefaces.RegistroCallback;
+import com.iesoluciones.freecon.models.Usuario;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.view.RxViewGroup;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -108,6 +110,17 @@ public class RegistroUnoFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
+        if(registroCallback.isFacebookUser()){
+           Usuario temp=  App.getInstance().getDaoSession().getUsuarioDao().loadAll().get(0);
+            editNombre.setText(temp.getNombre());
+            editNombre.setEnabled(false);
+            editApellido.setText(temp.getApellido());
+            editApellido.setEnabled(false);
+            editCorreoElectronico.setText(temp.getEmail());
+            editCorreoElectronico.setEnabled(false);
+            editContrasena.setEnabled(false);
+            editContrasenaConfirmacion.setEnabled(false);
+        }
 
     }
 
