@@ -18,7 +18,11 @@
                 android:id="@+id/editProfesion"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/profesion"/>
+                android:hint="@string/profesion"
+                android:lines="1"
+                android:inputType="text"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/viewpager"/>
 
         </android.support.design.widget.TextInputLayout>
 
