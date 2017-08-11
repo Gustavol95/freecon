@@ -40,7 +40,7 @@ public class RegistroBody {
     @SerializedName("estado")
     String estado;
     @SerializedName("servicios")
-    List<Integer> servicios;
+    List<ServicioBody> servicios;
 
     public String getNombre() {
         return nombre;
@@ -154,11 +154,11 @@ public class RegistroBody {
         this.estado = estado;
     }
 
-    public List<Integer> getServicios() {
+    public List<ServicioBody> getServicios() {
         return servicios;
     }
 
-    public void setServicios(List<Integer> servicios) {
+    public void setServicios(List<ServicioBody> servicios) {
         this.servicios = servicios;
     }
     @Override
@@ -198,10 +198,10 @@ public class RegistroBody {
         body.setInterior("44");
         body.setExterior("1114");
         body.setCelular("6675124578");
-        List<Integer> servs=new ArrayList<>();
-        servs.add(2);
-        servs.add(3);
-        body.setServicios(servs);
+        //List<Integer> servs=new ArrayList<>();
+        //servs.add(2);
+        //servs.add(3);
+        //body.setServicios(servs);
         return body;
     }
 }

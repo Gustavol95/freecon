@@ -37,7 +37,11 @@ import retrofit2.http.Query;
 
 public class App extends Application {
 
-    public static final String BASE_URL ="http://10.112.32.244/freecon/v1/";
+    static final String[] URLS={
+            "http://10.112.32.244/freecon/v1/",
+            "http://10.112.32.135/freecon/backend/public/"
+    };
+    public static final String BASE_URL =URLS[0];
     private static App shareInstance;
     private DaoSession daoSession;
     ApiRoutes apiRoutes;
@@ -57,8 +61,6 @@ public class App extends Application {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new LogInterceptor())
                 .build();
-
-
 
         Retrofit retrofit = new Retrofit.Builder()
                 .client(client)
