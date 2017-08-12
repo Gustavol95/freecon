@@ -1,5 +1,6 @@
 package com.iesoluciones.freecon.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.iesoluciones.freecon.App;
 import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.fragments.HistorialFragment;
 import com.iesoluciones.freecon.fragments.SaldoFragment;
@@ -65,6 +67,9 @@ public class DrawerActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.cerrarSesion) {
+            App.getInstance().getDaoSession().getUsuarioDao().deleteAll();
+            startActivity(new Intent(DrawerActivity.this,LoginActivity.class));
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
