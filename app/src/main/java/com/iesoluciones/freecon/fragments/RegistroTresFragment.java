@@ -99,9 +99,7 @@ public class RegistroTresFragment  extends Fragment {
                             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                                     LinearLayout.LayoutParams.WRAP_CONTENT,
                                     LinearLayout.LayoutParams.WRAP_CONTENT);
-
                             input.setLayoutParams(lp);
-
                             new AlertDialog.Builder(getContext())
                                     .setTitle("Registro exitoso")
                                     .setMessage("Se envió un código de activación al correo electrónico: "+value.getUsuario().getEmail())
@@ -141,10 +139,7 @@ public class RegistroTresFragment  extends Fragment {
 
 
                                     }).show();
-
-
                         }
-
                         @Override
                         public void onError(Throwable e) {
                             super.onError(e);

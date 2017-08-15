@@ -25,6 +25,7 @@ public class SplashActivity extends AppCompatActivity {
         if (accessToken != null) {
             if (accessToken.isExpired()) {
                 Toast.makeText(this, "Expiró, pidelo", Toast.LENGTH_SHORT).show();
+                //ya valió lo de FB, checar como funciona la logica
             } else {
                 Toast.makeText(this, "JALEESE COMPA", Toast.LENGTH_SHORT).show();
                 ObservableHelper.loginFb(accessToken.getToken())
@@ -49,6 +50,10 @@ public class SplashActivity extends AppCompatActivity {
             }
         } else {
             Toast.makeText(this, "PIDELOO", Toast.LENGTH_SHORT).show();
+            // No facebook, PERO no hay validacion para el otro tipo de sesión iniciada.
+            Log.i(TAG,"  No facebook, PERO no hay validacion para el otro tipo de sesión iniciada.");
+            startActivity(new Intent(SplashActivity.this,LoginActivity.class));
+            finish();
         }
 
 

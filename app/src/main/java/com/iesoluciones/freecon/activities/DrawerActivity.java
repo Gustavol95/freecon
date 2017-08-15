@@ -17,7 +17,7 @@ import com.iesoluciones.freecon.App;
 import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.fragments.HistorialFragment;
 import com.iesoluciones.freecon.fragments.SaldoFragment;
-import com.iesoluciones.freecon.fragments.ServiciosFragment;
+import com.iesoluciones.freecon.fragments.CategoriasFragment;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,7 +41,7 @@ public class DrawerActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(2).setChecked(true);
-        Fragment newFragment = ServiciosFragment.newInstance();
+        Fragment newFragment = CategoriasFragment.newInstance();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.frameDrawer, newFragment).commit();
     }
@@ -93,7 +93,7 @@ public class DrawerActivity extends AppCompatActivity
                 ft.replace(R.id.frameDrawer, newFragment).commit();
                 break;
             case R.id.solicitudes:
-                 newFragment = ServiciosFragment.newInstance();
+                 newFragment = CategoriasFragment.newInstance();
                  ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.frameDrawer, newFragment).commit();
                 break;

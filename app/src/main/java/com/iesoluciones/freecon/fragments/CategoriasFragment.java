@@ -13,18 +13,18 @@ import com.iesoluciones.freecon.R;
  * Created by iedeveloper on 07/08/17.
  */
 
-public class ServiciosFragment extends Fragment {
+public class CategoriasFragment extends Fragment {
 
 
 
-    public static ServiciosFragment newInstance(){
-        return new ServiciosFragment();
+    public static CategoriasFragment newInstance(){
+        return new CategoriasFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_servicios, container, false);
+        return inflater.inflate(R.layout.fragment_categorias, container, false);
     }
 
     @Override
