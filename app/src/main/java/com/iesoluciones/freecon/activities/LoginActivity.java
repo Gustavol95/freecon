@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 Log.i(TAG, loginResult.getAccessToken().getToken() + " TOKEN FB");
-                ObservableHelper.loginFb(loginResult.getAccessToken().getToken())
+                ObservableHelper.loginFb(loginResult.getAccessToken().getToken(), FirebaseInstanceId.getInstance().getToken())
                         .subscribe(new CustomResourceObserver<LoginFbResponse>(LoginActivity.this) {
                             @Override
                             public void onNext(LoginFbResponse value) {
@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.buttonIniciarSesion)
     public void iniciarSesion() {
-        ObservableHelper.login(editUsuario.getText().toString().trim(), editContrasena.getText().toString())
+        ObservableHelper.login(editUsuario.getText().toString().trim(), editContrasena.getText().toString(), FirebaseInstanceId.getInstance().getToken())
                 .subscribe(new CustomResourceObserver<ResponseBody>(this) {
                     @Override
                     public void onNext(ResponseBody value) {

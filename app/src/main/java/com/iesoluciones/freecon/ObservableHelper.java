@@ -83,15 +83,15 @@ public class ObservableHelper {
     }
 
 
-    public static Observable<ResponseBody> login(String email, String password) {
-        return App.getInstance().getApiRoutes().login(email, password)
+    public static Observable<ResponseBody> login(String email, String password, String firebaseToken) {
+        return App.getInstance().getApiRoutes().login(email, password,firebaseToken)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
 
     }
 
-    public static Observable<LoginFbResponse> loginFb(String token) {
-        return App.getInstance().getApiRoutes().loginFb(token)
+    public static Observable<LoginFbResponse> loginFb(String facebookToken, String firebaseToken) {
+        return App.getInstance().getApiRoutes().loginFb(facebookToken,firebaseToken)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map((LoginFbResponse data) -> {
@@ -173,6 +173,13 @@ public class ObservableHelper {
                 });
 
     }
+
+     public static Observable<ResponseBody> logout(String firebaseToken){
+         return App.getInstance().getApiRoutes().logout("Bearer "+App.getInstance().getToken(),firebaseToken)
+                 .subscribeOn(Schedulers.newThread())
+                 .observeOn(AndroidSchedulers.mainThread());
+     }
+
 }
 
 

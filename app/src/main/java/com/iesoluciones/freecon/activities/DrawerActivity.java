@@ -10,14 +10,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.login.LoginManager;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.iesoluciones.freecon.App;
+import com.iesoluciones.freecon.ObservableHelper;
 import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.fragments.HistorialFragment;
 import com.iesoluciones.freecon.fragments.SaldoFragment;
 import com.iesoluciones.freecon.fragments.CategoriasFragment;
+import com.iesoluciones.freecon.network.helpers.CustomResourceObserver;
+import com.iesoluciones.freecon.services.FirebaseInstanceService;
+
+import okhttp3.ResponseBody;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -69,6 +77,20 @@ public class DrawerActivity extends AppCompatActivity
         if (id == R.id.cerrarSesion) {
             App.getInstance().getDaoSession().getUsuarioDao().deleteAll();
             startActivity(new Intent(DrawerActivity.this,LoginActivity.class));
+            LoginManager.getInstance().logOut();
+           ObservableHelper.logout(FirebaseInstanceId.getInstance().getToken())
+                    .subscribe(new CustomResourceObserver<ResponseBody>(DrawerActivity.this) {
+                        @Override
+                        public void onNext(ResponseBody value) {
+                            Log.i(TAG,"AIII "+value.toString());
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                            Log.i(TAG,"FALLO "+e.toString());
+                        }
+                    });
             finish();
             return true;
         }

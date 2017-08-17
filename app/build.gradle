@@ -13,6 +13,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -23,6 +26,10 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
 }
 
 dependencies {
@@ -30,7 +37,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
+    compile 'com.github.phajduk:RxValidator:94fdca4ec6504985d6187080f1d9e9580703c082' //commit hash
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'

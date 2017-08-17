@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.iesoluciones.freecon.ObservableHelper;
 import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.models.LoginFbResponse;
@@ -28,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
                 //ya valió lo de FB, checar como funciona la logica
             } else {
                 Toast.makeText(this, "JALEESE COMPA", Toast.LENGTH_SHORT).show();
-                ObservableHelper.loginFb(accessToken.getToken())
+                ObservableHelper.loginFb(accessToken.getToken(), FirebaseInstanceId.getInstance().getToken())
                         .subscribe(new CustomResourceObserver<LoginFbResponse>(SplashActivity.this) {
                             @Override
                             public void onNext(LoginFbResponse value) {

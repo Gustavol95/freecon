@@ -27,6 +27,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Query;
@@ -109,7 +110,7 @@ public class App extends Application {
 
         @FormUrlEncoded
         @POST("proveedores/login")
-        Observable<ResponseBody> login(@Field("email") String email, @Field("password") String password);
+        Observable<ResponseBody> login(@Field("email") String email, @Field("password") String password, @Field("token") String tokenFirebase);
 
         @FormUrlEncoded
         @POST("proveedores/confirmaccount")
@@ -117,10 +118,14 @@ public class App extends Application {
 
         @FormUrlEncoded
         @POST("proveedores/login-fb")
-        Observable<LoginFbResponse> loginFb(@Field("token") String token);
+        Observable<LoginFbResponse> loginFb(@Field("token") String facebookToken, @Field("token_firebase") String firebaseToken);
 
         @PUT("proveedores/finalizarregistro-fb")
         Observable<LoginFbResponse> finalizarRegistroFb(@Body RegistroBody registroFbBody);
+
+        @FormUrlEncoded
+        @POST("proveedores/logoutfirebase")
+        Observable<ResponseBody> logout(@Header("Authorization") String jwtToken, @Field("token") String firebaseToken);
 
     }
 

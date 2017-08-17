@@ -11,21 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.phajduk.rxvalidator.RxValidator;
 import com.iesoluciones.freecon.App;
 import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.intefaces.RegistroCallback;
 import com.iesoluciones.freecon.models.Usuario;
-import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.view.RxViewGroup;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 
-import org.w3c.dom.Text;
 
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func6;
+
 
 /**
  * Created by iedeveloper on 07/08/17.
@@ -148,5 +148,178 @@ public class RegistroUnoFragment extends Fragment {
 
     public void setRegistroCallback(RegistroCallback registroCallback) {
         this.registroCallback = registroCallback;
+    }
+
+    public void setUpValidators() {
+
+        Observable<Boolean> telefonoValidator =
+                RxValidator.createFor(editTelefono)
+                        .nonEmpty(getResources().getString(R.string.non_empty))
+                        .length(10, getResources().getString(R.string.phone_length))
+                        .onFocusChanged()
+                        .onValueChanged()
+                        .toObservable()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .map(result -> {
+                            textInputTelefono.setErrorEnabled(result.isProper() ? false : true);
+                            textInputTelefono.setError(result.getMessage());
+                            return result.isProper();
+                        });
+
+
+        Observable<Boolean> contrasenaValidator =
+                RxValidator.createFor(editContrasena)
+                        .nonEmpty("No puede estar vacío")
+                        .maxLength(15, getResources().getString(R.string.password_max_length))
+                        .minLength(8, getResources().getString(R.string.password_min_length))
+                        .onFocusChanged()
+                        .toObservable()
+                        .map(result -> {
+                            textInputContrasena.setErrorEnabled(result.isProper() ? false : true);
+                            textInputContrasena.setError(result.getMessage());
+                            return result.isProper();
+                        });
+
+
+        Observable<Boolean> contrasenaConfirmValidator =
+                RxValidator.createFor(editContrasenaConfirmacion)
+                        .nonEmpty(getResources().getString(R.string.non_empty))
+                        .sameAs(editContrasena, getResources().getString(R.string.password_confirm_dont_match))
+                        .maxLength(15, getResources().getString(R.string.password_max_length))
+                        .minLength(8, getResources().getString(R.string.password_min_length))
+                        .onFocusChanged()
+                        .onValueChanged()
+                        .toObservable()
+                        .map(result -> {
+                            textInputContrasenaConfirmacion.setErrorEnabled(result.isProper() ? false : true);
+                            textInputContrasenaConfirmacion.setError(result.getMessage());
+                            return result.isProper();
+                        });
+
+
+        Observable<Boolean> emailValidator =
+                RxValidator.createFor(editCorreoElectronico)
+                        .nonEmpty(getResources().getString(R.string.non_empty))
+                        .email(getResources().getString(R.string.email_incorrect))
+                        .onFocusChanged()
+                        .toObservable()
+                        .map(result -> {
+                            textInputCorreoElectronico.setErrorEnabled(result.isProper() ? false : true);
+                            textInputCorreoElectronico.setError(result.getMessage());
+                            return result.isProper();
+                        });
+
+        Observable<Boolean> lastnameValidator =
+                RxValidator.createFor(editApellido)
+                        .nonEmpty(getResources().getString(R.string.non_empty))
+                        .onFocusChanged()
+                        .toObservable()
+                        .map(result -> {
+                            textInputApellido.setErrorEnabled(result.isProper() ? false : true);
+                            textInputApellido.setError(result.getMessage());
+                            return result.isProper();
+                        });
+        Observable<Boolean> firstnameValidator =
+                RxValidator.createFor(editNombre)
+                        .nonEmpty(getResources().getString(R.string.non_empty))
+                        .onFocusChanged()
+                        .toObservable()
+                        .map(result -> {
+                            textInputNombre.setErrorEnabled(result.isProper() ? false : true);
+                            textInputNombre.setError(result.getMessage());
+                            return result.isProper();
+                        });
+
+        Observable<Boolean> calleValidator =
+                RxValidator.createFor(editCalle)
+                        .nonEmpty(getResources().getString(R.string.non_empty))
+                        .onFocusChanged()
+                        .toObservable()
+                        .map(result -> {
+                            textInputCalle.setErrorEnabled(result.isProper() ? false : true);
+                            textInputCalle.setError(result.getMessage());
+                            return result.isProper();
+                        });
+
+        Observable<Boolean> coloniaValidator =
+                RxValidator.createFor(editColonia)
+                        .nonEmpty(getResources().getString(R.string.non_empty))
+                        .onFocusChanged()
+                        .toObservable()
+                        .map(result -> {
+                            textInputColonia.setErrorEnabled(result.isProper() ? false : true);
+                            textInputColonia.setError(result.getMessage());
+                            return result.isProper();
+                        });
+
+        Observable<Boolean> ciudadValidator =
+                RxValidator.createFor(editCiudad)
+                        .nonEmpty(getResources().getString(R.string.non_empty))
+                        .onFocusChanged()
+                        .toObservable()
+                        .map(result -> {
+                            textInputCiudad.setErrorEnabled(result.isProper() ? false : true);
+                            textInputCiudad.setError(result.getMessage());
+                            return result.isProper();
+                        });
+        Observable<Boolean> estadoValidator =
+                RxValidator.createFor(editEstado)
+                        .nonEmpty(getResources().getString(R.string.non_empty))
+                        .onFocusChanged()
+                        .toObservable()
+                        .map(result -> {
+                            textInputEstado.setErrorEnabled(result.isProper() ? false : true);
+                            textInputEstado.setError(result.getMessage());
+                            return result.isProper();
+                        });
+
+        Observable<Boolean> cpValidator =
+                RxValidator.createFor(editCP)
+                        .nonEmpty(getResources().getString(R.string.non_empty))
+                        .onFocusChanged()
+                        .toObservable()
+                        .map(result -> {
+                            textInputCP.setErrorEnabled(result.isProper() ? false : true);
+                            textInputCP.setError(result.getMessage());
+                            return result.isProper();
+                        });
+
+        Observable<Boolean> exteriorValidator =
+                RxValidator.createFor(editCalle)
+                        .nonEmpty(getResources().getString(R.string.non_empty))
+                        .onFocusChanged()
+                        .toObservable()
+                        .map(result -> {
+                            textInputCalle.setErrorEnabled(result.isProper() ? false : true);
+                            textInputCalle.setError(result.getMessage());
+                            return result.isProper();
+                        });
+
+
+        firstnameValidator.subscribe();
+        lastnameValidator.subscribe();
+        emailValidator.subscribe();
+        contrasenaValidator.subscribe();
+        contrasenaConfirmValidator.subscribe();
+        telefonoValidator.subscribe();
+        calleValidator.subscribe();
+        ciudadValidator.subscribe();
+        coloniaValidator.subscribe();
+        estadoValidator.subscribe();
+        cpValidator.subscribe();
+        exteriorValidator.subscribe();
+
+        Observable.combineLatest(firstnameValidator,
+                lastnameValidator,
+                emailValidator,
+                contrasenaValidator,
+                contrasenaConfirmValidator,
+                telefonoValidator,
+                calleValidator,
+                ciudadValidator,
+
+                new Func6<Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean>() {
+
+
     }
 }
