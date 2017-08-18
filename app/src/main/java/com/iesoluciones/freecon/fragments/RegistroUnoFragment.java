@@ -325,7 +325,7 @@ public class RegistroUnoFragment extends Fragment {
 //
 //        Observable<Boolean> ambos = Observable.combineLatest(uno, dos, (uno1, dos1) -> uno1 && dos1)
 //                .map(todoValido -> {
-//                    Log.i(TAG, "Es Valido todo " + todoValido);
+//                    Log.i(TAG, "Es Valido too " + todoValido);
 //                    buttonContinuar.setEnabled(todoValido);
 //                    return todoValido;
 //                });

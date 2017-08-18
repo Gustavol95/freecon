@@ -51,6 +51,7 @@
     <string name="title_alert">Alerta !</string>
     <string name="title_error">Error !</string>
     <string name="button_ok">Continuar</string>
+    <string name="button_confirm">Confirmar</string>
     <string name="button_send">Enviar</string>
     <string name="button_cancel">Cancelar</string>
     <string name="there_was_an_error">Hubo un problema</string>

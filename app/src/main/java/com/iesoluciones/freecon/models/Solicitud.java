@@ -27,6 +27,7 @@ public class Solicitud {
     String email;
     String avatar;
     String profesion;
+    @SerializedName("solicitud_descripcion")
     String descripcion;
     String celular;
     String calle;
@@ -38,8 +39,6 @@ public class Solicitud {
     String cp;
     String ciudad;
     String estado;
-
-
 
 
     @Generated(hash = 2112171869)
@@ -70,10 +69,8 @@ public class Solicitud {
 
     @Generated(hash = 1764112260)
     public Solicitud() {
+
     }
-
-
-
 
     public long getId() {
         return id;

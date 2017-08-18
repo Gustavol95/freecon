@@ -31,6 +31,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -130,6 +131,13 @@ public class App extends Application {
 
         @GET("proveedores/solicitudes")
         Observable<SolicitudesResponse> solicitudes(@Header("Authorization") String token);
+
+        @FormUrlEncoded
+        @POST("proveedores/solicitudes/{solicitud_id}/respuesta")
+        Observable<ResponseBody> respuestaSolicitud(@Header("Authorization") String token,@Path("solicitud_id") String idSolicitud, @Field("respuesta") String respuesta);
+
+        @GET("proveedores/solicitudes/historial")
+        Observable<SolicitudesResponse> historial(@Header("Authorization") String token);
 
     }
 

@@ -210,13 +210,22 @@ public class ObservableHelper {
          return App.getInstance().getApiRoutes().solicitudes("Bearer "+App.getInstance().getToken())
                  .subscribeOn(Schedulers.newThread())
                  .observeOn(AndroidSchedulers.mainThread())
-                 .map(new Function<SolicitudesResponse, SolicitudesResponse>() {
-                     @Override
-                     public SolicitudesResponse apply(SolicitudesResponse solicitudesResponse) throws Exception {
-                         Log.i(TAG,solicitudesResponse.toString());
-                         return solicitudesResponse;
-                     }
+                 .map(solicitudesResponse -> {
+                     Log.i(TAG,solicitudesResponse.toString());
+                     return solicitudesResponse;
                  });
+     }
+
+     public static Observable<ResponseBody> respuestaSolicitud(String idSolicitud,String respuesta){
+         return App.getInstance().getApiRoutes().respuestaSolicitud("Bearer "+App.getInstance().getToken(),idSolicitud,respuesta)
+                 .subscribeOn(Schedulers.newThread())
+                 .observeOn(AndroidSchedulers.mainThread());
+     }
+
+     public static Observable<SolicitudesResponse> historialSolicitudes(){
+         return App.getInstance().getApiRoutes().historial("Bearer "+App.getInstance().getToken())
+                 .subscribeOn(Schedulers.newThread())
+                 .observeOn(AndroidSchedulers.mainThread());
      }
 
 }

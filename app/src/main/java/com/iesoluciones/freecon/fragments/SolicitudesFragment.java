@@ -53,7 +53,7 @@ public class SolicitudesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         adapter = new SolicitudesAdapter(new ArrayList<>(), solicitud -> {
-            //todo mandar a detalle de solicitud
+
             getFragmentManager().beginTransaction().replace(R.id.frameDrawer,SolicitudDetalleFragment.newInstance(solicitud))
                     .addToBackStack("TAG")
                     .commit();
