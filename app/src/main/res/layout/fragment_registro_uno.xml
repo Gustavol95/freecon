@@ -25,14 +25,14 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputNombre"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     app:hintEnabled="true"
                     android:hint="@string/nombre">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editNombre"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:lines="1"
                         android:inputType="textPersonName"
                         />
@@ -41,14 +41,14 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputApellido"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     app:hintEnabled="true"
                     android:hint="@string/apellido">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editApellido"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:lines="1"
                         android:inputType="textPersonName"/>
 
@@ -56,14 +56,14 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputCorreoElectronico"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     app:hintEnabled="true"
                     android:hint="@string/correo">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editCorreoElectronico"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:lines="1"
                         android:inputType="textEmailAddress"/>
 
@@ -72,12 +72,12 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputContrasena"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editContrasena"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="@string/contrasena"
                         android:lines="1"
                         android:inputType="textPassword"/>
@@ -87,12 +87,12 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputContrasenaConfirmacion"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editContrasenaConfirmacion"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="@string/confirma_contrasena"
                         android:lines="1"
                         android:inputType="textPassword"/>
@@ -102,12 +102,12 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputTelefono"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editTelefono"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="@string/telefono"
                         android:lines="1"
                         android:inputType="phone"/>
@@ -130,12 +130,12 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputCalle"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editCalle"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="@string/calle"
                         android:lines="1"
                         android:inputType="text"/>
@@ -145,12 +145,12 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputColonia"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editColonia"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="@string/colonia"
                         android:lines="1"
                         android:inputType="text"/>
@@ -160,12 +160,12 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputCiudad"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editCiudad"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="@string/ciudad"
                         android:lines="1"
                         android:inputType="text"/>
@@ -175,12 +175,12 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/textInputEstado"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editEstado"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="@string/estado"
                         android:lines="1"
                         android:inputType="text"
@@ -196,14 +196,14 @@
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/textInputCP"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         >
 
                         <android.support.design.widget.TextInputEditText
                             android:id="@+id/editCP"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:hint="@string/cp"
                             android:lines="1"
                             android:inputType="text"
@@ -215,13 +215,13 @@
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/textInputExterior"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <android.support.design.widget.TextInputEditText
                             android:id="@+id/editExterior"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:hint="@string/exterior"
                             android:lines="1"
                             android:imeOptions="actionNext"
@@ -233,13 +233,13 @@
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/textInputInterior"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <android.support.design.widget.TextInputEditText
                             android:id="@+id/editInterior"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:hint="@string/interior"
                             android:lines="1"
                             android:inputType="text"
@@ -255,6 +255,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:enabled="true"
             android:text="@string/continuar" />
 
     </LinearLayout>

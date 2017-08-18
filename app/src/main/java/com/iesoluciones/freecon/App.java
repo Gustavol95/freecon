@@ -10,6 +10,7 @@ import com.iesoluciones.freecon.models.LoginFbResponse;
 import com.iesoluciones.freecon.models.RegistroBody;
 import com.iesoluciones.freecon.models.Servicio;
 import com.iesoluciones.freecon.models.ServicioResponse;
+import com.iesoluciones.freecon.models.SolicitudesResponse;
 import com.iesoluciones.freecon.network.interceptors.LogInterceptor;
 
 import org.greenrobot.greendao.database.Database;
@@ -110,7 +111,7 @@ public class App extends Application {
 
         @FormUrlEncoded
         @POST("proveedores/login")
-        Observable<ResponseBody> login(@Field("email") String email, @Field("password") String password, @Field("token") String tokenFirebase);
+        Observable<LoginFbResponse> login(@Field("email") String email, @Field("password") String password, @Field("token") String tokenFirebase);
 
         @FormUrlEncoded
         @POST("proveedores/confirmaccount")
@@ -126,6 +127,9 @@ public class App extends Application {
         @FormUrlEncoded
         @POST("proveedores/logoutfirebase")
         Observable<ResponseBody> logout(@Header("Authorization") String jwtToken, @Field("token") String firebaseToken);
+
+        @GET("proveedores/solicitudes")
+        Observable<SolicitudesResponse> solicitudes(@Header("Authorization") String token);
 
     }
 

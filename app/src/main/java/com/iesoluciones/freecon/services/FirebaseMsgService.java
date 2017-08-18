@@ -12,11 +12,12 @@ import com.google.firebase.messaging.RemoteMessage;
  */
 
 public class FirebaseMsgService extends FirebaseMessagingService {
+    static final String TAG = FirebaseMsgService.class.getSimpleName();
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        Log.i("TAG","lllegoooo");
+        Log.i(TAG,remoteMessage.getData().get("solicitud_id")+" ESE MERO ES ");
     }
 
 

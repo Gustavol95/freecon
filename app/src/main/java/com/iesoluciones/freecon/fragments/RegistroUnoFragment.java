@@ -18,12 +18,13 @@ import com.iesoluciones.freecon.intefaces.RegistroCallback;
 import com.iesoluciones.freecon.models.Usuario;
 
 
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.functions.Func2;
 import rx.functions.Func6;
 
 
@@ -33,8 +34,7 @@ import rx.functions.Func6;
 
 public class RegistroUnoFragment extends Fragment {
 
-    static String TAG=RegistroUnoFragment.class.getCanonicalName();
-
+    static String TAG = RegistroUnoFragment.class.getCanonicalName();
 
 
     @BindView(R.id.textInputNombre)
@@ -94,8 +94,8 @@ public class RegistroUnoFragment extends Fragment {
     RegistroCallback registroCallback;
 
 
-    public static RegistroUnoFragment newInstance(RegistroCallback registroCallback){
-        RegistroUnoFragment fragment=new RegistroUnoFragment();
+    public static RegistroUnoFragment newInstance(RegistroCallback registroCallback) {
+        RegistroUnoFragment fragment = new RegistroUnoFragment();
         fragment.setRegistroCallback(registroCallback);
         return fragment;
     }
@@ -109,9 +109,9 @@ public class RegistroUnoFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,view);
-        if(registroCallback.isFacebookUser()){
-           Usuario temp=  App.getInstance().getDaoSession().getUsuarioDao().loadAll().get(0);
+        ButterKnife.bind(this, view);
+        if (registroCallback.isFacebookUser()) {
+            Usuario temp = App.getInstance().getDaoSession().getUsuarioDao().loadAll().get(0);
             editNombre.setText(temp.getNombre());
             editNombre.setEnabled(false);
             editApellido.setText(temp.getApellido());
@@ -120,12 +120,13 @@ public class RegistroUnoFragment extends Fragment {
             editCorreoElectronico.setEnabled(false);
             editContrasena.setEnabled(false);
             editContrasenaConfirmacion.setEnabled(false);
-        }
 
+        }
+        setUpValidators();
     }
 
     @OnClick(R.id.buttonContinuar)
-    public void continuar(){
+    public void continuar() {
         registroCallback.getRegistro().setNombre(editNombre.getText().toString());
         registroCallback.getRegistro().setApellido(editApellido.getText().toString());
         registroCallback.getRegistro().setContrasena(editContrasena.getText().toString());
@@ -290,36 +291,60 @@ public class RegistroUnoFragment extends Fragment {
                         .onFocusChanged()
                         .toObservable()
                         .map(result -> {
-                            textInputCalle.setErrorEnabled(result.isProper() ? false : true);
-                            textInputCalle.setError(result.getMessage());
+                            textInputExterior.setErrorEnabled(result.isProper() ? false : true);
+                            textInputExterior.setError(result.getMessage());
                             return result.isProper();
                         });
 
 
-        firstnameValidator.subscribe();
-        lastnameValidator.subscribe();
-        emailValidator.subscribe();
-        contrasenaValidator.subscribe();
-        contrasenaConfirmValidator.subscribe();
-        telefonoValidator.subscribe();
-        calleValidator.subscribe();
-        ciudadValidator.subscribe();
-        coloniaValidator.subscribe();
-        estadoValidator.subscribe();
-        cpValidator.subscribe();
-        exteriorValidator.subscribe();
-
-        Observable.combineLatest(firstnameValidator,
-                lastnameValidator,
-                emailValidator,
-                contrasenaValidator,
-                contrasenaConfirmValidator,
-                telefonoValidator,
-                calleValidator,
-                ciudadValidator,
-
-                new Func6<Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean>() {
-
+//        Observable<Boolean> uno = Observable.combineLatest(firstnameValidator,
+//                lastnameValidator,
+//                emailValidator,
+//                contrasenaValidator,
+//                contrasenaConfirmValidator,
+//                telefonoValidator, (firstName, lastName, email, contrasena, contrasenaConfirm, telefono)
+//                        -> firstName && lastName && email && contrasena && contrasenaConfirm && telefono)
+//                .map(bool-> {
+//                    Log.i(TAG,"Observable 1 "+bool);
+//                    return bool;
+//                });
+//
+//
+//        Observable<Boolean> dos = Observable.combineLatest(
+//                calleValidator,
+//                ciudadValidator,
+//                coloniaValidator,
+//                estadoValidator,
+//                cpValidator,
+//                exteriorValidator, (calle, ciudad, colonia, estado, cp, exterior)
+//                        -> calle && ciudad && colonia && estado && cp && exterior)
+//                .map(bool->{
+//                    Log.i(TAG,"Observable 2 "+bool);
+//                    return bool;
+//                });
+//
+//        Observable<Boolean> ambos = Observable.combineLatest(uno, dos, (uno1, dos1) -> uno1 && dos1)
+//                .map(todoValido -> {
+//                    Log.i(TAG, "Es Valido todo " + todoValido);
+//                    buttonContinuar.setEnabled(todoValido);
+//                    return todoValido;
+//                });
+//
+//        firstnameValidator.subscribe();
+//        lastnameValidator.subscribe();
+//        emailValidator.subscribe();
+//        contrasenaValidator.subscribe();
+//        contrasenaConfirmValidator.subscribe();
+//        telefonoValidator.subscribe();
+//        calleValidator.subscribe();
+//        ciudadValidator.subscribe();
+//        coloniaValidator.subscribe();
+//        estadoValidator.subscribe();
+//        cpValidator.subscribe();
+//        exteriorValidator.subscribe();
+//        uno.subscribe();
+//        dos.subscribe();
+//        ambos.subscribe();
 
     }
 }

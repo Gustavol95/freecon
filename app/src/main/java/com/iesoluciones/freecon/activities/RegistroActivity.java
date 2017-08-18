@@ -87,6 +87,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     public void pasoUno(RegistroCallback registroCallback) {
             Fragment newFragment = RegistroDosFragment.newInstance(registroCallback);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.addToBackStack("TAG");
             ft.replace(R.id.frameRegistro, newFragment,DOS).commit();
         index=1;
 
@@ -96,6 +97,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     public void pasoDos( RegistroCallback registroCallback) {
         Fragment newFragment = RegistroTresFragment.newInstance(registroCallback);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.addToBackStack("TAG");
         ft.replace(R.id.frameRegistro, newFragment, TRES).commit();
         index=2;
     }

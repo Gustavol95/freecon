@@ -21,6 +21,7 @@ import com.iesoluciones.freecon.App;
 import com.iesoluciones.freecon.ObservableHelper;
 import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.activities.DrawerActivity;
+import com.iesoluciones.freecon.activities.LoginActivity;
 import com.iesoluciones.freecon.intefaces.RegistroCallback;
 import com.iesoluciones.freecon.models.LoginFbResponse;
 import com.iesoluciones.freecon.models.RegistroBody;
@@ -85,8 +86,17 @@ public class RegistroTresFragment  extends Fragment {
                         @Override
                         public void onNext(LoginFbResponse value) {
                             //Fin de registro, ya tengo el token
-                            startActivity(new Intent(getContext(), DrawerActivity.class));
-                            ((AppCompatActivity)getContext()).finish();
+                            new AlertDialog.Builder(getContext())
+                                    .setMessage("Tu cuenta ha sido activada.")
+                                    .setTitle("Registro exitoso")
+                                    .setCancelable(false)
+                                    .setPositiveButton(App.getInstance().getResources().getString(R.string.button_send), (dialog, id) -> {
+                                        //Enviar a drawer activity
+                                        startActivity(new Intent(getContext(),LoginActivity.class));
+                                        ((AppCompatActivity)getContext()).finish();
+                                    })
+                                    .show();
+
                         }
                     });
         }else{
@@ -123,7 +133,7 @@ public class RegistroTresFragment  extends Fragment {
                                                                             .setCancelable(false)
                                                                             .setPositiveButton(App.getInstance().getResources().getString(R.string.button_send), (dialog, id) -> {
                                                                                 //Enviar a drawer activity
-                                                                                getContext().startActivity(new Intent(getContext(),DrawerActivity.class));
+                                                                                getContext().startActivity(new Intent(getContext(),LoginActivity.class));
                                                                                 ((AppCompatActivity)getContext()).finish();
                                                                             })
                                                                             .setNegativeButton(getContext().getString(R.string.button_cancel),(dialog1, which) -> {

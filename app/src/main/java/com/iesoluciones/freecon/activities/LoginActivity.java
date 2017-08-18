@@ -143,9 +143,10 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.buttonIniciarSesion)
     public void iniciarSesion() {
         ObservableHelper.login(editUsuario.getText().toString().trim(), editContrasena.getText().toString(), FirebaseInstanceId.getInstance().getToken())
-                .subscribe(new CustomResourceObserver<ResponseBody>(this) {
+                .subscribe(new CustomResourceObserver<LoginFbResponse>(this) {
                     @Override
-                    public void onNext(ResponseBody value) {
+                    public void onNext(LoginFbResponse value) {
+                        Log.i(TAG,value.toString());
                         startActivity(new Intent(LoginActivity.this,DrawerActivity.class));
                         finish();
                     }

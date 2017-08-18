@@ -9,6 +9,7 @@ import com.iesoluciones.freecon.models.LoginFbResponse;
 import com.iesoluciones.freecon.models.RegistroBody;
 import com.iesoluciones.freecon.models.Servicio;
 import com.iesoluciones.freecon.models.ServicioResponse;
+import com.iesoluciones.freecon.models.SolicitudesResponse;
 import com.iesoluciones.freecon.models.Usuario;
 
 import java.util.List;
@@ -78,13 +79,38 @@ public class ObservableHelper {
                     App.getInstance().getDaoSession().getUsuarioDao().insertOrReplaceInTx(user);
 
                     App.getInstance().setToken(data.getToken());
+                    Log.i(TAG,"ESTA ES MI TOKEN "+data.getToken());
                     return data;
                 });
     }
 
 
-    public static Observable<ResponseBody> login(String email, String password, String firebaseToken) {
+    public static Observable<LoginFbResponse> login(String email, String password, String firebaseToken) {
         return App.getInstance().getApiRoutes().login(email, password,firebaseToken)
+                .map((LoginFbResponse data)->{
+                    Log.i(TAG,"SE metió a la BD "+data.toString());
+                    Usuario user = new Usuario();
+                    user.setId(data.getUsuario().getId());
+                    user.setNombre(data.getUsuario().getFirst_name());
+                    user.setApellido(data.getUsuario().getLast_name());
+                    user.setEmail(data.getUsuario().getEmail());
+                    user.setAvatar(data.getUsuario().getAvatar());
+                    user.setProfesion(data.getUsuario().getProfesion());
+                    user.setDescripcion(data.getUsuario().getDescripcion());
+                    user.setCelular(data.getUsuario().getCelular());
+                    user.setCalle(data.getUsuario().getCalle());
+                    user.setInterior(data.getUsuario().getNum_int());
+                    user.setExterior(data.getUsuario().getNum_ext());
+                    user.setColonia(data.getUsuario().getColonia());
+                    user.setCp(data.getUsuario().getCp());
+                    user.setCiudad(data.getUsuario().getCiudad());
+                    user.setEstado(data.getUsuario().getEstado());
+
+                    App.getInstance().getDaoSession().getUsuarioDao().insertOrReplaceInTx(user);
+
+                    App.getInstance().setToken(data.getToken());
+                    return data;
+                })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
 
@@ -178,6 +204,19 @@ public class ObservableHelper {
          return App.getInstance().getApiRoutes().logout("Bearer "+App.getInstance().getToken(),firebaseToken)
                  .subscribeOn(Schedulers.newThread())
                  .observeOn(AndroidSchedulers.mainThread());
+     }
+
+     public static Observable<SolicitudesResponse> solicitudes (){
+         return App.getInstance().getApiRoutes().solicitudes("Bearer "+App.getInstance().getToken())
+                 .subscribeOn(Schedulers.newThread())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .map(new Function<SolicitudesResponse, SolicitudesResponse>() {
+                     @Override
+                     public SolicitudesResponse apply(SolicitudesResponse solicitudesResponse) throws Exception {
+                         Log.i(TAG,solicitudesResponse.toString());
+                         return solicitudesResponse;
+                     }
+                 });
      }
 
 }

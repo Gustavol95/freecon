@@ -21,9 +21,8 @@ import com.iesoluciones.freecon.ObservableHelper;
 import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.fragments.HistorialFragment;
 import com.iesoluciones.freecon.fragments.SaldoFragment;
-import com.iesoluciones.freecon.fragments.CategoriasFragment;
+import com.iesoluciones.freecon.fragments.SolicitudesFragment;
 import com.iesoluciones.freecon.network.helpers.CustomResourceObserver;
-import com.iesoluciones.freecon.services.FirebaseInstanceService;
 
 import okhttp3.ResponseBody;
 
@@ -49,7 +48,7 @@ public class DrawerActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(2).setChecked(true);
-        Fragment newFragment = CategoriasFragment.newInstance();
+        Fragment newFragment = SolicitudesFragment.newInstance();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.frameDrawer, newFragment).commit();
     }
@@ -115,7 +114,7 @@ public class DrawerActivity extends AppCompatActivity
                 ft.replace(R.id.frameDrawer, newFragment).commit();
                 break;
             case R.id.solicitudes:
-                 newFragment = CategoriasFragment.newInstance();
+                 newFragment = SolicitudesFragment.newInstance();
                  ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.frameDrawer, newFragment).commit();
                 break;
