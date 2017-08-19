@@ -1,6 +1,8 @@
 package com.iesoluciones.freecon.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
@@ -148,6 +150,13 @@ public class LoginActivity extends AppCompatActivity {
                     public void onNext(LoginFbResponse value) {
                         Log.i(TAG,value.toString());
                         startActivity(new Intent(LoginActivity.this,DrawerActivity.class));
+                        SharedPreferences prefs =
+                                getSharedPreferences(getResources().getString(R.string.shared_preferences), Context.MODE_PRIVATE);
+
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean(getResources().getString(R.string.sesion_correo), true);
+                        editor.commit();
+
                         finish();
                     }
 

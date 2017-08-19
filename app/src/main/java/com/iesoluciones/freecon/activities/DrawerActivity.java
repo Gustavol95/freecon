@@ -1,6 +1,8 @@
 package com.iesoluciones.freecon.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -77,6 +79,12 @@ public class DrawerActivity extends AppCompatActivity
             App.getInstance().getDaoSession().getUsuarioDao().deleteAll();
             startActivity(new Intent(DrawerActivity.this,LoginActivity.class));
             LoginManager.getInstance().logOut();
+            SharedPreferences prefs =
+                    getSharedPreferences(getResources().getString(R.string.shared_preferences), Context.MODE_PRIVATE);
+
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean(getResources().getString(R.string.sesion_correo), false);
+            editor.commit();
            ObservableHelper.logout(FirebaseInstanceId.getInstance().getToken())
                     .subscribe(new CustomResourceObserver<ResponseBody>(DrawerActivity.this) {
                         @Override

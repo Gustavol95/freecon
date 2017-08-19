@@ -9,6 +9,8 @@
 
     <!-- LOGIN-->
     <string name="iniciarSesion">Iniciar Sesión</string>
+    <string name="shared_preferences">freeconprestadores</string>
+    <string name="sesion_correo">sesion_correo</string>
 
    <!-- REGISTRO-->
     <string name="nombre">Nombre</string>
