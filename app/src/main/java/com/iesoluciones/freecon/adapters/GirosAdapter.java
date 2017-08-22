@@ -1,6 +1,7 @@
 package com.iesoluciones.freecon.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.util.Log;
@@ -13,13 +14,16 @@ import android.widget.TextView;
 
 import com.iesoluciones.freecon.App;
 import com.iesoluciones.freecon.R;
+import com.iesoluciones.freecon.intefaces.RegistroCallback;
 import com.iesoluciones.freecon.models.Categoria;
 import com.iesoluciones.freecon.models.CategoriaDao;
+import com.iesoluciones.freecon.models.RegistroBody;
 import com.iesoluciones.freecon.models.Servicio;
 import com.iesoluciones.freecon.models.ServicioBody;
 import com.iesoluciones.freecon.models.ServicioDao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,13 +40,23 @@ public class GirosAdapter extends PagerAdapter {
     private List<Categoria> categorias;
     private List<List<Servicio>> servicios;
     List<ServicioBody> seleccionados;
+    List<Integer> idServicios = new ArrayList<>();
+    RegistroCallback registroCallback;
 
-    public GirosAdapter(Context context) {
+    public GirosAdapter(Context context, RegistroCallback registroCallback) {
         mContext = context;
         categorias = App.getInstance().getDaoSession().getCategoriaDao().queryBuilder()
                 .orderAsc(CategoriaDao.Properties.Id).list();
         servicios = new ArrayList<>();
+        this.registroCallback = registroCallback;
         seleccionados = new ArrayList<>();
+        if (registroCallback.getRegistro().getServicios() != null) {
+            seleccionados = registroCallback.getRegistro().getServicios();
+            for (ServicioBody s : seleccionados) {
+                idServicios.add(s.getIdServicio());
+            }
+        }
+
         for (Categoria c : categorias) {
             servicios.add(App.getInstance().getDaoSession().getServicioDao().queryBuilder().where(ServicioDao.Properties.CategoriaId.eq(c.getId())).list());
         }
@@ -64,7 +78,7 @@ public class GirosAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return categorias.size() - 1;
+        return categorias.size();
     }
 
     @Override
@@ -86,7 +100,6 @@ public class GirosAdapter extends PagerAdapter {
         List<Servicio> serviciosMostrados;
 
         public GirosViewHolder() {
-
         }
 
         public GirosViewHolder(List<Categoria> categorias, List<List<Servicio>> servicios, View view, int position) {
@@ -94,34 +107,42 @@ public class GirosAdapter extends PagerAdapter {
             tvTitulo.setText(categorias.get(position).getNombre());
             this.position = position;
             this.serviciosMostrados = servicios.get(position);
-            for (int i=0; i<servicios.get(position).size()-1;i++) {
-                Servicio s=servicios.get(position).get(i);
+            for (int i = 0; i < servicios.get(position).size() - 1; i++) {
+                Servicio s = servicios.get(position).get(i);
                 AppCompatCheckBox cb = new AppCompatCheckBox(mContext);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                lp.setMargins(30, 30, 30, 30);
+                cb.setTextColor(Color.BLACK);
+                cb.setPadding(10, 10, 10, 10);
+                cb.setLayoutParams(lp);
+                cb.setTextSize(16f);
                 cb.setText(s.getNombre());
                 cb.setId(i);
+                Log.i(TAG,"set ID "+i);
+                if (idServicios.contains((int) s.getId())) {
+                    cb.setChecked(true);
+                }
                 cb.setOnCheckedChangeListener(this);
                 linearGiros.addView(cb);
             }
-            /*for (Servicio s : servicios.get(position)) {
-                AppCompatCheckBox cb = new AppCompatCheckBox(mContext);
-                cb.setText(s.getNombre());
-                cb.setId((int) s.getId());
-                cb.setOnCheckedChangeListener(this);
-                linearGiros.addView(cb);
-            }*/
         }
-
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
-                Log.i(TAG, "se agrega " + new ServicioBody((int)categorias.get(position).getId(),(int)servicios.get(position).get(buttonView.getId()).getId()));
-                seleccionados.add(new ServicioBody((int)categorias.get(position).getId(),(int)servicios.get(position).get(buttonView.getId()).getId()));
+                seleccionados.add(new ServicioBody((int) categorias.get(position).getId(), (int) servicios.get(position).get(buttonView.getId()).getId()));
+                idServicios.add((int) servicios.get(position).get(buttonView.getId()).getId());
+            } else {
+                Iterator<ServicioBody> iter = seleccionados.iterator();
+                while (iter.hasNext()) {
+                    ServicioBody s = iter.next();
+                    if (s.getIdServicio()==(int)servicios.get(position).get(buttonView.getId()).getId())
+                        iter.remove();
+                }
                 Log.i(TAG, "Actual " + seleccionados.size());
+                idServicios.remove(idServicios.indexOf((int) servicios.get(position).get(buttonView.getId()).getId()));
             }
-            else{
-               Log.i(TAG, "Eliminado  "+seleccionados.remove(new ServicioBody((int)categorias.get(position).getId(),(int)servicios.get(position).get(buttonView.getId()).getId()))+" actual: "+seleccionados.size());
-            }
+            registroCallback.getRegistro().setServicios(seleccionados);
         }
     }
 

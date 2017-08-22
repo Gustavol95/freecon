@@ -29,28 +29,33 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/inputLayoutUsuario"
             android:layout_width="250dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:hint="@string/correo">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/editUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:maxLength="50"/>
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputContrasena"
             android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:hint="@string/contrasena">
+            android:layout_height="wrap_content"
+            android:hint="@string/contrasena"
+            >
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/editContrasena"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
+                android:singleLine="true"
+                android:maxLength="50"
                 />
 
         </android.support.design.widget.TextInputLayout>
@@ -66,6 +71,7 @@
                 android:id="@+id/tvOlvidarContrasena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 android:text="¿Olvidaste tu constraseña?"
                 android:textAlignment="center" />
         </FrameLayout>
@@ -75,6 +81,8 @@
             android:layout_width="250dp"
             android:layout_height="match_parent"
             android:text="@string/iniciarSesion"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimaryDark"
             android:layout_marginTop="20dp"/>
 
         <com.facebook.login.widget.LoginButton

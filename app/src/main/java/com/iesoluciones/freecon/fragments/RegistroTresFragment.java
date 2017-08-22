@@ -48,6 +48,10 @@ public class RegistroTresFragment  extends Fragment {
     TextInputEditText editDescripcion;
     @BindView(R.id.buttonFinalizar)
     AppCompatButton buttonFinalizar;
+    @BindView(R.id.inputLayoutProfesion)
+    TextInputLayout inputLayoutProfesion;
+    @BindView(R.id.editProfesion)
+    TextInputEditText editProfesion;
 
     public static RegistroTresFragment newInstance(RegistroCallback registroCallback){
         RegistroTresFragment fragment=new RegistroTresFragment();
@@ -65,6 +69,10 @@ public class RegistroTresFragment  extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
+        if(registroCallback.getRegistro().getProfesion()!=null){
+            editProfesion.setText(registroCallback.getRegistro().getProfesion());
+            editDescripcion.setText(registroCallback.getRegistro().getDescripcion());
+        }
     }
 
     public RegistroCallback getRegistroCallback() {
@@ -75,8 +83,17 @@ public class RegistroTresFragment  extends Fragment {
         this.registroCallback = registroCallback;
     }
 
+
+    @Override
+    public void onStop() {
+        registroCallback.getRegistro().setProfesion(editProfesion.getText().toString());
+        registroCallback.getRegistro().setDescripcion(editDescripcion.getText().toString());
+        super.onStop();
+    }
+
     @OnClick(R.id.buttonFinalizar)
     public void finalizar(){
+        registroCallback.getRegistro().setProfesion(editProfesion.getText().toString());
         registroCallback.getRegistro().setDescripcion(editDescripcion.getText().toString());
         Log.i(TAG,registroCallback.getRegistro().toString());
         //PETICION Y KILL ACTIVITY;

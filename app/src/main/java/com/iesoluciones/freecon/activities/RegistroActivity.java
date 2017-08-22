@@ -91,6 +91,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
             ft.replace(R.id.frameRegistro, newFragment,DOS).commit();
+            getSupportActionBar().setTitle("Selecciona tus servicios");
             Log.i(TAG,"Que show");
         index=1;
 
@@ -100,7 +101,9 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     public void pasoDos( RegistroCallback registroCallback) {
         Fragment newFragment = RegistroTresFragment.newInstance(registroCallback);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
         ft.replace(R.id.frameRegistro, newFragment, TRES).commit();
+        getSupportActionBar().setTitle("Breve descripción");
         index=2;
     }
 
@@ -134,11 +137,14 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                 ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right);
                 ft.replace(R.id.frameRegistro, newFragment,UNO).commit();
                 index=0;
+                getSupportActionBar().setTitle("Registro");
                 break;
             case 2:
                 newFragment = RegistroDosFragment.newInstance(this);
                 ft = getSupportFragmentManager().beginTransaction();
+                ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right);
                 ft.replace(R.id.frameRegistro, newFragment,DOS).commit();
+                getSupportActionBar().setTitle("Selecciona tus servicios");
                 index=1;
                 break;
         }

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.iesoluciones.freecon.App;
 import com.iesoluciones.freecon.ObservableHelper;
@@ -37,10 +38,7 @@ public class RegistroDosFragment extends Fragment {
     static final String TAG = RegistroDosFragment.class.getCanonicalName();
 
     RegistroCallback registroCallback;
-    @BindView(R.id.inputLayoutProfesion)
-    TextInputLayout inputLayoutProfesion;
-    @BindView(R.id.editProfesion)
-    TextInputEditText editProfesion;
+
     @BindView(R.id.viewpager)
     ViewPager viewpager;
     @BindView(R.id.buttonContinuar)
@@ -63,10 +61,10 @@ public class RegistroDosFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-
-
-        adapter = new GirosAdapter(this.getContext());
+        adapter = new GirosAdapter(this.getContext(),registroCallback);
         viewpager.setAdapter(adapter);
+        viewpager.setPageMargin(-130);
+
     }
 
     public RegistroCallback getRegistroCallback() {
@@ -79,9 +77,11 @@ public class RegistroDosFragment extends Fragment {
 
     @OnClick(R.id.buttonContinuar)
     public void continuar() {
-        registroCallback.getRegistro().setProfesion(editProfesion.getText().toString());
-        registroCallback.getRegistro().setServicios(adapter.getSeleccionados());
-        registroCallback.pasoDos(registroCallback);
+        if(adapter.getSeleccionados().size()>1){
+            registroCallback.getRegistro().setServicios(adapter.getSeleccionados());
+            registroCallback.pasoDos(registroCallback);
+        }else
+            Toast.makeText(getContext(), "Selecciona por lo menos 2 Servicios", Toast.LENGTH_LONG).show();
     }
 }
 

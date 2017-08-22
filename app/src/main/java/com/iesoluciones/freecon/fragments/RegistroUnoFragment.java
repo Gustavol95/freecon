@@ -94,7 +94,6 @@ public class RegistroUnoFragment extends Fragment {
     RegistroCallback registroCallback;
     String errorNombre,errorApellido,errorEmail,errorContrasena,errorConfirmarContrasena,errorTelefono,errorCalle,errorColonia,errorCiudad,errorEstado,errorCP,errorExterior;
 
-
     public static RegistroUnoFragment newInstance(RegistroCallback registroCallback) {
         RegistroUnoFragment fragment = new RegistroUnoFragment();
         fragment.setRegistroCallback(registroCallback);
@@ -122,7 +121,6 @@ public class RegistroUnoFragment extends Fragment {
             editCorreoElectronico.setEnabled(false);
             editContrasena.setEnabled(false);
             editContrasenaConfirmacion.setEnabled(false);
-
         }
 
         if(registroCallback.getRegistro().getNombre()!=null) {
@@ -140,10 +138,11 @@ public class RegistroUnoFragment extends Fragment {
             editInterior.setText(registroCallback.getRegistro().getInterior());
             editTelefono.requestFocus();
             editTelefono.clearFocus();
+            editExterior.requestFocus();
+            editExterior.clearFocus();
             editContrasenaConfirmacion.setText(" ");
             editContrasenaConfirmacion.setText("");
         }
-
     }
 
     @OnClick(R.id.buttonContinuar)
@@ -161,7 +160,6 @@ public class RegistroUnoFragment extends Fragment {
         registroCallback.getRegistro().setExterior(editExterior.getText().toString());
         registroCallback.getRegistro().setInterior(editInterior.getText().toString());
         registroCallback.pasoUno(registroCallback);
-
     }
 
     public RegistroCallback getRegistroCallback() {
@@ -173,7 +171,6 @@ public class RegistroUnoFragment extends Fragment {
     }
 
     public void setUpValidators() {
-
         Observable<Boolean> telefonoValidator =
                 RxValidator.createFor(editTelefono)
                         .nonEmpty(getResources().getString(R.string.non_empty))
@@ -187,7 +184,6 @@ public class RegistroUnoFragment extends Fragment {
                             errorTelefono=result.getMessage();
                             return result.isProper();
                         });
-
 
         Observable<Boolean> contrasenaValidator =
                 RxValidator.createFor(editContrasena)
@@ -203,7 +199,6 @@ public class RegistroUnoFragment extends Fragment {
                             return result.isProper();
                         });
 
-
         Observable<Boolean> contrasenaConfirmValidator =
                 RxValidator.createFor(editContrasenaConfirmacion)
                         .nonEmpty(getResources().getString(R.string.non_empty))
@@ -218,7 +213,6 @@ public class RegistroUnoFragment extends Fragment {
                             errorConfirmarContrasena=result.getMessage();
                             return result.isProper();
                         });
-
 
         Observable<Boolean> emailValidator =
                 RxValidator.createFor(editCorreoElectronico)
