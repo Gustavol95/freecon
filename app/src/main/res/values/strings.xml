@@ -10,7 +10,7 @@
     <!-- LOGIN-->
     <string name="iniciarSesion">Iniciar Sesión</string>
     <string name="shared_preferences">freeconprestadores</string>
-    <string name="sesion_correo">sesion_correo</string>
+
 
    <!-- REGISTRO-->
     <string name="nombre">Nombre</string>
@@ -80,11 +80,11 @@
     <string name="password_min_length">Mínimo 8 caracteres</string>
     <string name="email_incorrect">El correo proporcionado no es válido</string>
 
-    <!-- FACEBOOK METADATA -->
     <string name="facebook_app_id">154269361790967</string>
     <string name="fb_login_protocol_scheme">fb154269361790967</string>
 
-
-
+    <!-- SHARED PREFERENCES -->
+    <string name="token">token</string>
+    <string name="sesion_correo">sesion_correo</string>
 
 </resources>

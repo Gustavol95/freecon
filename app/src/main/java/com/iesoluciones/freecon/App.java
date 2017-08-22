@@ -1,5 +1,7 @@
 package com.iesoluciones.freecon;
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.facebook.FacebookSdk;
 import com.iesoluciones.freecon.models.CategoriaResponse;
@@ -46,6 +48,7 @@ public class App extends Application {
     };
     public static final String BASE_URL =URLS[0];
     private static App shareInstance;
+    private SharedPreferences prefs;
     private DaoSession daoSession;
     ApiRoutes apiRoutes;
     String token;
@@ -73,6 +76,10 @@ public class App extends Application {
                 .build();
 
         apiRoutes = retrofit.create(ApiRoutes.class);
+
+        prefs = getSharedPreferences(getResources().getString(R.string.shared_preferences), Context.MODE_PRIVATE);
+
+
     }
 
     public DaoSession getDaoSession() {
@@ -92,11 +99,18 @@ public class App extends Application {
     }
 
     public String getToken() {
-        return token;
+        return prefs.getString(getResources().getString(R.string.token),"");
     }
 
     public void setToken(String token) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(getResources().getString(R.string.token), token);
+        editor.commit();
         this.token = token;
+    }
+
+    public SharedPreferences getPrefs() {
+        return prefs;
     }
 
     public interface ApiRoutes{

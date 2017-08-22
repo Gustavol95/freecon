@@ -184,7 +184,12 @@
                         android:hint="@string/estado"
                         android:lines="1"
                         android:inputType="text"
-                        android:nextFocusDown="@+id/textInputCP"/>
+                        android:nextFocusDown="@+id/editCP"
+                        android:nextFocusForward="@+id/editCP"
+                        android:nextFocusLeft="@+id/editCP"
+                        android:nextFocusRight="@+id/editCP"
+                        android:nextFocusUp="@+id/editCP"
+                        />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -208,7 +213,7 @@
                             android:lines="1"
                             android:inputType="text"
                             android:imeOptions="actionNext"
-                            android:nextFocusRight="@+id/editExterior"/>
+                            />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -255,7 +260,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:enabled="true"
+            android:enabled="false"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimaryDark"
             android:text="@string/continuar" />
 
     </LinearLayout>

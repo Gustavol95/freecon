@@ -43,6 +43,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
         setSupportActionBar(toolbar);
         registro=new RegistroBody();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Registro");
 
         facebookUser=getIntent().getBooleanExtra("fb",false);
         Log.i(TAG," facebook "+facebookUser);
@@ -68,6 +69,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                     case 1:
                         newFragment = RegistroUnoFragment.newInstance(this);
                          ft = getSupportFragmentManager().beginTransaction();
+                        ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right);
                         ft.replace(R.id.frameRegistro, newFragment,UNO).commit();
                         index=0;
                         break;
@@ -87,8 +89,9 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     public void pasoUno(RegistroCallback registroCallback) {
             Fragment newFragment = RegistroDosFragment.newInstance(registroCallback);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.addToBackStack("TAG");
+            ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
             ft.replace(R.id.frameRegistro, newFragment,DOS).commit();
+            Log.i(TAG,"Que show");
         index=1;
 
     }
@@ -97,7 +100,6 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     public void pasoDos( RegistroCallback registroCallback) {
         Fragment newFragment = RegistroTresFragment.newInstance(registroCallback);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.addToBackStack("TAG");
         ft.replace(R.id.frameRegistro, newFragment, TRES).commit();
         index=2;
     }
@@ -115,5 +117,30 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     @Override
     public boolean isFacebookUser() {
         return facebookUser;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment newFragment;
+        FragmentTransaction ft;
+
+        switch(index){
+            case 0:
+                 super.onBackPressed();
+                break;
+            case 1:
+                newFragment = RegistroUnoFragment.newInstance(this);
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right);
+                ft.replace(R.id.frameRegistro, newFragment,UNO).commit();
+                index=0;
+                break;
+            case 2:
+                newFragment = RegistroDosFragment.newInstance(this);
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameRegistro, newFragment,DOS).commit();
+                index=1;
+                break;
+        }
     }
 }
