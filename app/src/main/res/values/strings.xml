@@ -9,8 +9,6 @@
 
     <!-- LOGIN-->
     <string name="iniciarSesion">Iniciar Sesión</string>
-    <string name="shared_preferences">freeconprestadores</string>
-
 
    <!-- REGISTRO-->
     <string name="nombre">Nombre</string>
@@ -84,6 +82,7 @@
     <string name="fb_login_protocol_scheme">fb154269361790967</string>
 
     <!-- SHARED PREFERENCES -->
+    <string name="shared_preferences">freeconprestadores</string>
     <string name="token">token</string>
     <string name="sesion_correo">sesion_correo</string>
 

@@ -30,6 +30,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     static final String DOS="dos";
     static final String TRES="tres";
     int index;
+
     @BindView(R.id.toolbarRegistro)
     Toolbar toolbar;
     RegistroBody registro;

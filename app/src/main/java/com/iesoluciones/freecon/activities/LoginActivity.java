@@ -1,31 +1,24 @@
 package com.iesoluciones.freecon.activities;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.LoginStatusCallback;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.iesoluciones.freecon.App;
 import com.iesoluciones.freecon.ObservableHelper;
 import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.models.Categoria;
@@ -38,9 +31,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.observers.ResourceObserver;
-import io.reactivex.subjects.Subject;
-import okhttp3.ResponseBody;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -76,9 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         ObservableHelper.getServicios().subscribe(new CustomResourceObserver<List<Servicio>>(this) {
             @Override
             public void onNext(List<Servicio> value) {
-
             }
-
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
@@ -91,9 +79,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
-
-
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -136,7 +121,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     @OnClick(R.id.linearRegistrate)
     public void registrarse() {
         startActivity(new Intent(LoginActivity.this, RegistroActivity.class));
@@ -156,14 +140,11 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putBoolean(getResources().getString(R.string.sesion_correo), true);
                         editor.commit();
-
                         finish();
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
-
                     }
                 });
         //  startActivity(new Intent(LoginActivity.this,DrawerActivity.class));
@@ -175,6 +156,4 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-
-
 }

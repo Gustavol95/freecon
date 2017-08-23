@@ -17,11 +17,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.iesoluciones.freecon.App;
 import com.iesoluciones.freecon.ObservableHelper;
 import com.iesoluciones.freecon.R;
 import com.iesoluciones.freecon.activities.DrawerActivity;
 import com.iesoluciones.freecon.activities.LoginActivity;
+import com.iesoluciones.freecon.activities.SplashActivity;
 import com.iesoluciones.freecon.intefaces.RegistroCallback;
 import com.iesoluciones.freecon.models.LoginFbResponse;
 import com.iesoluciones.freecon.models.RegistroBody;
@@ -31,6 +34,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.ResponseBody;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by iedeveloper on 07/08/17.
@@ -109,7 +114,7 @@ public class RegistroTresFragment  extends Fragment {
                                     .setCancelable(false)
                                     .setPositiveButton(App.getInstance().getResources().getString(R.string.button_send), (dialog, id) -> {
                                         //Enviar a drawer activity
-                                        startActivity(new Intent(getContext(),LoginActivity.class));
+                                        startActivity(new Intent(getContext(),DrawerActivity.class));
                                         ((AppCompatActivity)getContext()).finish();
                                     })
                                     .show();
@@ -149,9 +154,33 @@ public class RegistroTresFragment  extends Fragment {
                                                                             .setTitle("Registro exitoso")
                                                                             .setCancelable(false)
                                                                             .setPositiveButton(App.getInstance().getResources().getString(R.string.button_send), (dialog, id) -> {
-                                                                                //Enviar a drawer activity
-                                                                                getContext().startActivity(new Intent(getContext(),LoginActivity.class));
-                                                                                ((AppCompatActivity)getContext()).finish();
+
+                                                                                AccessToken accessToken = AccessToken.getCurrentAccessToken();
+                                                                                if (accessToken != null) {
+                                                                                    if (accessToken.isExpired()) {
+                                                                                        startActivity(new Intent(getContext(), LoginActivity.class));
+                                                                                        ((AppCompatActivity)getContext()).finish();
+                                                                                    } else {
+                                                                                        ObservableHelper.loginFb(accessToken.getToken(), FirebaseInstanceId.getInstance().getToken())
+                                                                                                .subscribe(new CustomResourceObserver<LoginFbResponse>(getContext()) {
+                                                                                                    @Override
+                                                                                                    public void onNext(LoginFbResponse value) {
+                                                                                                        if (value.getUsuario().getActivado() == 1) {
+                                                                                                            //Enviar a drawer activity
+                                                                                                            getContext().startActivity(new Intent(getContext(),DrawerActivity.class));
+                                                                                                            ((AppCompatActivity)getContext()).finish();
+                                                                                                        } else {
+                                                                                                            getContext().startActivity(new Intent(getContext(),LoginActivity.class));
+                                                                                                            ((AppCompatActivity)getContext()).finish();
+                                                                                                        }
+                                                                                                    }
+
+                                                                                                });
+
+                                                                                    }
+
+                                                                                }
+
                                                                             })
                                                                             .setNegativeButton(getContext().getString(R.string.button_cancel),(dialog1, which) -> {
                                                                                 ((AppCompatActivity)getContext()).finish();
